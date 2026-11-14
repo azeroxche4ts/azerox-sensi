@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AZEROX-SENSI — Secure Access</title>
+
+<style>
+:root{
+  --bg:#0A0A0A;
+  --bg-panel:#131313;
+  --bg-panel-raised:#1B1B1B;
+  --line:#2C2C2A;
+  --line-bright:#46443C;
+  --text:#F4F3EE;
+  --muted:#A8A69C;
+  --muted-dim:#5C5A50;
+  --amber:#D4AF37;
+  --cyan:#E8D9A6;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(212,175,55,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,175,55,.045) 1px,transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;
+}
+
+.login-box{
+  position:relative;
+  width:100%;
+  max-width:430px;
+  background:var(--bg-panel);
+  border:1px solid var(--line);
+  padding:40px;
+}
+
+.login-box::before,
+.login-box::after{
+  content:"";
+  position:absolute;
+  width:14px;
+  height:14px;
+  border-color:var(--cyan);
+  border-style:solid;
+}
+
+.login-box::before{
+  top:-1px;
+  left:-1px;
+  border-width:2px 0 0 2px;
+}
+
+.login-box::after{
+  top:-1px;
+  right:-1px;
+  border-width:2px 2px 0 0;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:25px;
+  font-weight:700;
+  letter-spacing:.08em;
+  margin-bottom:8px;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  background:var(--amber);
+  transform:rotate(45deg);
+  box-shadow:0 0 12px var(--amber);
+}
+
+.label{
+  color:var(--amber);
+  font-size:11px;
+  letter-spacing:.15em;
+  margin-bottom:30px;
+}
+
+.field{
+  margin-bottom:18px;
+}
+
+.field label{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.field input{
+  width:100%;
+  padding:14px;
+  background:var(--bg-panel-raised);
+  border:1px solid var(--line-bright);
+  color:var(--text);
+  font-size:14px;
+  outline:none;
+}
+
+.field input:focus{
+  border-color:var(--amber);
+  box-shadow:0 0 0 1px var(--amber);
+}
+
+.login-btn{
+  width:100%;
+  padding:16px;
+  margin-top:8px;
+  border:0;
+  background:var(--amber);
+  color:#14100A;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:.06em;
+  cursor:pointer;
+}
+
+.login-btn:hover{
+  box-shadow:0 0 25px rgba(212,175,55,.35);
+}
+
+.error{
+  display:none;
+  margin-top:15px;
+  padding:11px;
+  border:1px solid #6b3030;
+  background:#241313;
+  color:#d98b8b;
+  font-size:11px;
+}
+
+.demo{
+  margin-top:25px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  color:var(--muted-dim);
+  font-family:monospace;
+  font-size:10px;
+  line-height:1.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+  <div class="logo">
+    <span class="dot"></span>
+    AZEROX-SENSI
+  </div>
+
+  <div class="label">
+    // SECURE CALIBRATOR ACCESS
+  </div>
+
+  <div class="field">
+    <label>Username</label>
+    <input
+      type="text"
+      id="username"
+      placeholder="Enter username"
+      autocomplete="username"
+    >
+  </div>
+
+  <div class="field">
+    <label>Password</label>
+    <input
+      type="password"
+      id="password"
+      placeholder="Enter password"
+      autocomplete="current-password"
+    >
+  </div>
+
+  <button class="login-btn" onclick="login()">
+    ACCESS CALIBRATOR
+  </button>
+
+  <div class="error" id="error">
+    ACCESS DENIED — INVALID CREDENTIALS
+  </div>
+
+  <div class="demo">
+    AUTHENTICATION REQUIRED<br>
+    AZEROX-SENSI CALIBRATION SYSTEM
+  </div>
+
+</div>
+
+<script>
+
+function login(){
+
+  const username =
+    document.getElementById("username").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const error =
+    document.getElementById("error");
+
+  if((username === "ADMIN" || username === "admin") && password === "AZEROX@2007"){
+
+    window.location.href = "calibrator.html";
+
+  }else{
+
+    error.style.display = "block";
+
+  }
+
+}
+
+document.getElementById("password").addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Enter"){
+      login();
+    }
+
+  }
+);
+
+document.getElementById("username").addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Enter"){
+      login();
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
