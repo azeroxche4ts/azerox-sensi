@@ -1744,6 +1744,8 @@ function classifyDevice(brand, rawModel) {
     return {
       type: 'tablet',
       tierName: isApple ? 'iPadOS Large Canvas' : 'Android Tablet / Fold Screen',
+      cleanTier: isApple ? 'iPadOS Large Canvas' : 'Android Tablet Canvas',
+      display: isApple ? '120Hz Liquid Retina Display' : 'Wide AMOLED Display',
       screenTier: 'Wide Display (Controlled Sensitivity Profile)',
       isIOS: isApple,
       // On tablets, physical thumb distance is larger, so sensitivity must be tempered
@@ -1767,6 +1769,8 @@ function classifyDevice(brand, rawModel) {
     return {
       type: 'apple-phone',
       tierName: isPro ? 'Apple Flagship (120Hz ProMotion)' : 'Apple Retina (60Hz Ultra-Responsive)',
+      cleanTier: isPro ? 'Apple Flagship Performance' : 'Apple Retina Performance',
+      display: isPro ? '120Hz Super Retina XDR' : '60Hz Super Retina Display',
       screenTier: isPro ? '120Hz Super Retina XDR' : '60Hz Super Retina Display',
       isIOS: true,
       genOffset: isPro ? -2 : +2,
@@ -1790,6 +1794,8 @@ function classifyDevice(brand, rawModel) {
     return {
       type: 'gaming',
       tierName: 'Dedicated Gaming Flagship (144Hz–165Hz)',
+      cleanTier: 'Dedicated Gaming Flagship',
+      display: '144Hz–165Hz AMOLED',
       screenTier: 'High Touch Sampling (360Hz–1000Hz Ultra-Low Latency)',
       isIOS: false,
       genOffset: -3,
@@ -1817,6 +1823,8 @@ function classifyDevice(brand, rawModel) {
     return {
       type: 'flagship',
       tierName: 'Android Premium Flagship (120Hz LTPO)',
+      cleanTier: 'Android Premium Flagship',
+      display: '120Hz Dynamic AMOLED',
       screenTier: '120Hz Dynamic AMOLED / Super AMOLED',
       isIOS: false,
       genOffset: 0,
@@ -1840,6 +1848,8 @@ function classifyDevice(brand, rawModel) {
     return {
       type: 'mid-performance',
       tierName: 'Performance Mid-Tier (120Hz AMOLED)',
+      cleanTier: 'Mid-Tier Performance',
+      display: '120Hz AMOLED',
       screenTier: '120Hz Fast Response Touch Panel',
       isIOS: false,
       genOffset: +4,
@@ -1858,6 +1868,8 @@ function classifyDevice(brand, rawModel) {
   return {
     type: 'budget-entry',
     tierName: 'Standard / Entry Tier (60Hz–90Hz)',
+    cleanTier: 'Standard Entry Tier',
+    display: '60Hz–90Hz Display',
     screenTier: '60Hz–90Hz Display (Compensated High Sensitivity Curve)',
     isIOS: false,
     genOffset: +8,
@@ -1875,8 +1887,11 @@ function classifyDevice(brand, rawModel) {
 // Playstyle baseline templates
 const styleProfiles = {
   oneTap: {
-    label: 'One-tap headshot',
-    technique: 'Fast Vertical J-Drag (Quick Lift & Immediate Release)',
+    label: 'One-Tap Headshot',
+    technique: 'Fast Vertical J-Drag & Quick Release',
+    controlMethod: 'Fast Vertical J-Drag',
+    recoilMethod: 'Quick Lift & Immediate Release',
+    target: 'Maximum headshot flick precision, instantaneous lock-on.',
     general: [90, 96],
     reddot: [92, 98],
     x2: [72, 82],
@@ -1885,8 +1900,11 @@ const styleProfiles = {
     freelook: [88, 98]
   },
   spray: {
-    label: 'Full spray control',
+    label: 'Full Spray Control',
     technique: 'Linear Drag & Steady Recoil Pull-Down',
+    controlMethod: 'Linear Drag',
+    recoilMethod: 'Steady Pull-Down',
+    target: 'Smooth aiming, stable sprays and controlled recoil.',
     general: [80, 88],
     reddot: [78, 86],
     x2: [66, 76],
@@ -1897,6 +1915,9 @@ const styleProfiles = {
   rush: {
     label: 'Rusher',
     technique: 'Curved Rotation Drag & Instant 360° Gloo Wall',
+    controlMethod: 'Curved Rotation Drag',
+    recoilMethod: 'Instant 360° Gloo Wall',
+    target: 'Fast close-range turns, reflexive firing, and rapid barrier placement.',
     general: [95, 100],
     reddot: [94, 100],
     x2: [78, 88],
@@ -1905,8 +1926,11 @@ const styleProfiles = {
     freelook: [96, 100]
   },
   sniper: {
-    label: 'Sniper precision',
+    label: 'Sniper Precision',
     technique: 'Center-Dot Micro-Flick & Quick Weapon Switch',
+    controlMethod: 'Center-Dot Micro-Flick',
+    recoilMethod: 'Quick Weapon Switch Reset',
+    target: 'Long-range optic accuracy, micro-adjustments, and instant follow-ups.',
     general: [76, 85],
     reddot: [72, 82],
     x2: [60, 70],
@@ -1915,6 +1939,44 @@ const styleProfiles = {
     freelook: [68, 80]
   }
 };
+
+// Device optimization instructions
+function getDeviceOptimizations(brand, device) {
+  const b = (brand || '').toLowerCase();
+  if (device && device.isIOS) {
+    return [
+      "1. **Refresh Rate:** Force ProMotion (120Hz) through Display Settings.",
+      "2. **Touch Settings:** Set Haptic Touch to Fast in Accessibility Settings.",
+      "3. **Performance:** Disable Low Power Mode and Background App Refresh while gaming."
+    ];
+  }
+  if (b === 'xiaomi' || b === 'poco' || b === 'redmi') {
+    return [
+      "1. **Refresh Rate:** Force 120Hz through Display Settings.",
+      "2. **Game Mode:** Enable Game Turbo / Ultra Game Mode.",
+      "3. **Performance:** Keep the device in performance mode while gaming."
+    ];
+  }
+  if (b === 'samsung') {
+    return [
+      "1. **Refresh Rate:** Force 120Hz through Display Settings.",
+      "2. **Game Mode:** Enable Game Booster / Priority Mode in Game Plugins.",
+      "3. **Performance:** Keep the device in performance mode while gaming."
+    ];
+  }
+  if (b === 'asus' || b === 'redmagic') {
+    return [
+      "1. **Refresh Rate:** Force 120Hz / 144Hz through Display Settings.",
+      "2. **Game Mode:** Enable Ultra Game Mode / X-Mode.",
+      "3. **Performance:** Keep the device in performance mode while gaming."
+    ];
+  }
+  return [
+    "1. **Refresh Rate:** Force 120Hz through Display Settings.",
+    "2. **Game Mode:** Enable Game Turbo / Ultra Game Mode.",
+    "3. **Performance:** Keep the device in performance mode while gaming."
+  ];
+}
 
 // Calibration generator event
 genBtn.addEventListener("click", () => {
@@ -1946,9 +2008,17 @@ genBtn.addEventListener("click", () => {
     fire: fireSz,
     dpi: device.dpiString,
     tier: device.tierName,
+    cleanTier: device.cleanTier,
+    display: device.display,
     screen: device.screenTier,
     technique: profile.technique,
-    touchTip: device.touchTip
+    controlMethod: profile.controlMethod,
+    recoilMethod: profile.recoilMethod,
+    target: profile.target,
+    touchTip: device.touchTip,
+    isIOS: device.isIOS,
+    brand: brand,
+    deviceObj: device
   };
 
   // Render to UI
@@ -1979,25 +2049,61 @@ document.getElementById("copyBtn").addEventListener("click", () => {
   const v = output._vals;
   if (!v) return;
 
+  const dpiNum = (v.dpi && v.dpi.match(/\d+/) ? v.dpi.match(/\d+/)[0] : '437') + ' DPI';
+  const dpiClean = v.isIOS ? 'Native iOS Default' : dpiNum;
+  const devOption = v.isIOS ? 'Touch Accommodations / Gliding Cursor' : 'Smallest Width';
+  const optLines = getDeviceOptimizations(v.brand, v.deviceObj).join("\n");
+
   const text = [
-    `AZEROX-SENSI BATTLE ROYALE CALIBRATION`,
-    `Device: ${output._device} (${output._brand})`,
-    `Tier: ${v.tier}`,
-    `Playstyle: ${output._style}`,
-    `Drag Technique: ${v.technique}`,
+    `# AZEROX`,
+    `## BATTLE ROYALE – SENSITIVITY CALIBRATION`,
     ``,
-    `[SENSITIVITY SETTINGS]`,
-    `General: ${v.general}`,
-    `Red Dot: ${v.reddot}`,
-    `2x Scope: ${v.x2}`,
-    `4x Scope: ${v.x4}`,
-    `Sniper Scope: ${v.sniper}`,
-    `Free Look: ${v.freelook}`,
+    `**DEVICE:** ${output._device} (${output._brand})  `,
+    `**PERFORMANCE TIER:** ${v.cleanTier || 'Mid-Tier Performance'}  `,
+    `**DISPLAY:** ${v.display || '120Hz AMOLED'}  `,
+    `**PLAYSTYLE:** ${output._style}  `,
+    `**DRAG TECHNIQUE:** ${v.technique}`,
     ``,
-    `[DEVICE CONFIG]`,
-    `Fire Button Size: ${v.fire}%`,
-    `Recommended DPI: ${v.dpi}`,
-    `Optimization Tip: ${v.touchTip}`
+    `---`,
+    ``,
+    `### 01. SENSITIVITY SETTINGS`,
+    ``,
+    `| Setting | Recommended Value |`,
+    `|:---|:---:|`,
+    `| General | **${v.general}** |`,
+    `| Red Dot | **${v.reddot}** |`,
+    `| 2x Scope | **${v.x2}** |`,
+    `| 4x Scope | **${v.x4}** |`,
+    `| Sniper Scope | **${v.sniper}** |`,
+    `| Free Look | **${v.freelook}** |`,
+    ``,
+    `### 02. DEVICE CONFIGURATION`,
+    ``,
+    `| Configuration | Recommended Setting |`,
+    `|:---|:---:|`,
+    `| Fire Button Size | **${v.fire}%** |`,
+    `| Recommended DPI | **${dpiClean}** |`,
+    `| Developer Option | ${devOption} |`,
+    ``,
+    `### 03. DEVICE OPTIMIZATION`,
+    ``,
+    optLines,
+    ``,
+    `---`,
+    ``,
+    `### 04. CALIBRATION PROFILE`,
+    ``,
+    `**PROFILE NAME:** AZEROX – ${output._style.toUpperCase()}`,
+    ``,
+    `**CONTROL METHOD:** ${v.controlMethod}  `,
+    `**RECOIL METHOD:** ${v.recoilMethod}  `,
+    `**TARGET:** ${v.target}`,
+    ``,
+    `---`,
+    ``,
+    `**AZEROX | PERFORMANCE • PRECISION • CONTROL**`,
+    ``,
+    `*Recommended starting configuration. Fine-tune according to individual gameplay and device response.*`
   ].join("\n");
 
   navigator.clipboard.writeText(text).then(() => {
