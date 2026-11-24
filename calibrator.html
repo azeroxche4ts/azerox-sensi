@@ -468,6 +468,212 @@
     font-size: 12.5px; color: var(--silver-dim); max-width: 720px; line-height: 1.7; margin-bottom: 20px;
   }
   .copyright { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--silver-dim); }
+
+  /* Floating Community Widget */
+  .azr-float-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .azr-float-pill {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    background: var(--card-bg);
+    border: 1px solid var(--crimson);
+    padding: 12px 18px;
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(227, 38, 46, 0.25);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .azr-float-pill:hover {
+    background: #1B1B22;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7), 0 0 22px rgba(227, 38, 46, 0.4);
+  }
+  .azr-float-pill .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--crimson);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--crimson);
+    animation: blink 1.6s infinite;
+  }
+  .azr-float-pill .pill-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .azr-float-pill .pill-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--crimson);
+    font-weight: 600;
+  }
+
+  .azr-float-card {
+    width: 320px;
+    max-width: 90vw;
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba(227, 38, 46, 0.15);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: azrPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .azr-float-card:hover {
+    border-color: rgba(227, 38, 46, 0.45);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.8), 0 0 28px rgba(227, 38, 46, 0.2);
+  }
+  @keyframes azrPopIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .azr-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .azr-card-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+  }
+  .azr-card-title .live-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--crimson);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--crimson);
+    animation: blink 1.6s infinite;
+  }
+  .azr-card-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--crimson);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 3px;
+    font-weight: 600;
+  }
+  .azr-close-btn {
+    background: none;
+    border: none;
+    color: var(--silver);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 2px 6px;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .azr-close-btn:hover {
+    color: var(--crimson);
+    transform: scale(1.15);
+  }
+
+  .azr-card-desc {
+    font-size: 12.5px;
+    color: var(--silver);
+    line-height: 1.45;
+    margin-bottom: 14px;
+  }
+
+  .azr-links {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .azr-link-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card-raised);
+    border: 1px solid var(--line-bright);
+    padding: 10px 14px;
+    border-radius: 2px;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .azr-link-btn:hover {
+    border-color: rgba(227, 38, 46, 0.65);
+    background: #1F1F27;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 14px rgba(227, 38, 46, 0.15);
+  }
+  .azr-link-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+  .azr-link-btn:hover .azr-link-icon {
+    transform: scale(1.1);
+  }
+  .azr-icon-wa { color: #25D366; }
+  .azr-icon-tg { color: #229ED9; }
+  .azr-icon-dc { color: #5865F2; }
+
+  .azr-link-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .azr-link-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+  .azr-link-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--silver);
+    letter-spacing: 0.05em;
+  }
+  .azr-link-arrow {
+    color: var(--silver-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .azr-link-btn:hover .azr-link-arrow {
+    color: var(--crimson);
+    transform: translateX(3px);
+  }
+
+  @media(max-width: 600px) {
+    .azr-float-widget {
+      bottom: 16px;
+      right: 16px;
+      left: 16px;
+    }
+    .azr-float-card {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1831,6 +2037,83 @@ document.querySelectorAll(".faq-item").forEach(item => {
     }
   });
 });
+
+// Floating community widget toggle
+function toggleAzrWidget(show) {
+  const card = document.getElementById("azrFloatCard");
+  const pill = document.getElementById("azrFloatPill");
+  if (show) {
+    card.style.display = "block";
+    pill.style.display = "none";
+  } else {
+    card.style.display = "none";
+    pill.style.display = "flex";
+  }
+}
 </script>
+
+<!-- FLOATING "WELCOME TO AZEROX" COMMUNITY WIDGET -->
+<div class="azr-float-widget" id="azrCommunityWidget">
+  <!-- Minimized Trigger Pill -->
+  <div class="azr-float-pill" id="azrFloatPill" onclick="toggleAzrWidget(true)" title="Open Community Links">
+    <span class="dot"></span>
+    <span class="pill-text">WELCOME TO AZEROX</span>
+    <span class="pill-sub">// JOIN</span>
+  </div>
+
+  <!-- Expanded Floating Card -->
+  <div class="azr-float-card bracket" id="azrFloatCard">
+    <span class="bl"></span><span class="br"></span>
+    <div class="azr-card-head">
+      <div>
+        <div class="azr-card-title">
+          <span class="live-dot"></span>
+          WELCOME TO AZEROX
+        </div>
+        <div class="azr-card-sub">// JOIN OUR COMMUNITY</div>
+      </div>
+      <button class="azr-close-btn" onclick="toggleAzrWidget(false)" title="Minimize" aria-label="Minimize widget">&times;</button>
+    </div>
+
+    <p class="azr-card-desc">
+      Join our official community channels for sensitivity releases, device configs, and live support:
+    </p>
+
+    <div class="azr-links">
+      <a href="https://chat.whatsapp.com/ErWSQPbplLP1CCIRxbzuqi" target="_blank" rel="noopener noreferrer" class="azr-link-btn">
+        <span class="azr-link-icon azr-icon-wa">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.64c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.12-.22-.19-.47-.32"/></svg>
+        </span>
+        <div class="azr-link-info">
+          <div class="azr-link-name">WhatsApp</div>
+          <div class="azr-link-tag">Official Community Chat</div>
+        </div>
+        <span class="azr-link-arrow">&rarr;</span>
+      </a>
+
+      <a href="https://t.me/azerox_che4ts" target="_blank" rel="noopener noreferrer" class="azr-link-btn">
+        <span class="azr-link-icon azr-icon-tg">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l-.313 4.674c.458 0 .66-.21.916-.458l2.2-2.138 4.577 3.382c.844.465 1.45.226 1.66-.783l3-14.135c.308-1.237-.473-1.8-1.282-1.434z"/></svg>
+        </span>
+        <div class="azr-link-info">
+          <div class="azr-link-name">Telegram</div>
+          <div class="azr-link-tag">News & Config Drops</div>
+        </div>
+        <span class="azr-link-arrow">&rarr;</span>
+      </a>
+
+      <a href="https://discord.gg/z8HCwPPDZZ" target="_blank" rel="noopener noreferrer" class="azr-link-btn">
+        <span class="azr-link-icon azr-icon-dc">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        </span>
+        <div class="azr-link-info">
+          <div class="azr-link-name">Discord</div>
+          <div class="azr-link-tag">VIP Server & Support</div>
+        </div>
+        <span class="azr-link-arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
 </body>
 </html>
