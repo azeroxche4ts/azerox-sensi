@@ -256,90 +256,116 @@
     transform: none;
   }
 
-  /* output */
-  .output { margin-top: 32px; display: none; }
+  /* output & result-card (from azerox-sensitivity-result.html) */
+  .output { margin-top: 36px; display: none; }
   .output.show { display: block; animation: reveal 0.4s ease; }
-  @keyframes reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  .output-head {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 18px; flex-wrap: wrap; gap: 10px;
+  @keyframes reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .result-card {
+    overflow: hidden;
+    border: 1px solid #393039;
+    border-radius: 18px;
+    background: #151519;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    transition: all 0.25s ease;
   }
-  .output-head .device-tag {
-    font-family: 'JetBrains Mono', monospace; font-size: 13px;
-    color: var(--crimson); font-weight: 600;
+  .result-card:hover {
+    border-color: rgba(227, 38, 46, 0.45);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.65), 0 0 30px rgba(227, 38, 46, 0.15);
   }
-  .copy-btn {
-    background: transparent;
-    border: 1px solid var(--line-bright);
-    color: var(--silver);
-    padding: 8px 16px;
+
+  .result-card .result-hero {
+    padding: 28px;
+    background: linear-gradient(135deg, #211014, #17171c 65%);
+    border-bottom: 1px solid #303038;
+  }
+  .result-card .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .result-card .brand { margin: 0; font-size: 30px; font-weight: 900; letter-spacing: 2px; font-family: 'Oswald', sans-serif; color: #f7f7f8; }
+  .result-card .status {
+    border: 1px solid #236d45; color: #8ce5b0; background: #123322;
+    padding: 7px 11px; border-radius: 999px; font-size: 10px; font-weight: 800; letter-spacing: 1px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; cursor: pointer;
-    text-transform: uppercase; letter-spacing: 0.06em;
-    border-radius: 2px;
-    transition: all 0.25s ease;
   }
-  .copy-btn:hover {
-    border-color: var(--crimson);
-    color: var(--white);
-    background: var(--crimson-subtle);
-    box-shadow: 0 0 12px rgba(227, 38, 46, 0.2);
+  .result-card .result-hero h2 { margin: 25px 0 5px; font-size: 23px; letter-spacing: 1.3px; font-family: 'Oswald', sans-serif; color: #f7f7f8; font-weight: 700; }
+  .result-card .eyebrow { color: #ff5967; font-size: 12px; font-weight: 800; letter-spacing: 2px; font-family: 'JetBrains Mono', monospace; display: block; margin-bottom: 0; }
+  .result-card .eyebrow::before { display: none; }
+  .result-card .device { margin-top: 24px; padding-top: 18px; border-top: 1px solid #303038; }
+  .result-card .section-kicker { color: #a5a5ad; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 12px; font-family: 'JetBrains Mono', monospace; }
+  .result-card .device-name { font-size: 19px; font-weight: 800; margin-bottom: 12px; color: #f7f7f8; font-family: 'Inter', sans-serif; }
+  .result-card .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: transparent; border: none; }
+  .result-card .meta-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 11px; }
+  .result-card .meta-item span { display: block; color: #a5a5ad; font-size: 11px; margin-bottom: 6px; font-family: 'JetBrains Mono', monospace; }
+  .result-card .meta-item strong { font-size: 13px; line-height: 1.4; color: #f7f7f8; display: block; font-family: 'Inter', sans-serif; font-weight: 700; }
+
+  .result-card .content { padding: 26px 28px 28px; }
+  .result-card .section { margin-bottom: 26px; }
+  .result-card .section-title { display: flex; align-items: center; gap: 10px; margin: 0 0 17px; font-size: 14px; letter-spacing: .8px; color: #f7f7f8; font-family: 'Oswald', sans-serif; font-weight: 700; }
+  .result-card .section-title b { color: #ff5967; font-size: 12px; font-family: 'JetBrains Mono', monospace; }
+
+  .result-card .setting { margin: 0 0 15px; }
+  .result-card .setting-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; font-size: 13px; color: #f7f7f8; }
+  .result-card .setting-top strong { color: #ff5967; font-size: 17px; font-variant-numeric: tabular-nums; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+  .result-card .track { height: 7px; overflow: hidden; background: #303038; border-radius: 20px; }
+  .result-card .fill { height: 100%; background: linear-gradient(90deg, #a91020, #ff5361); border-radius: 20px; transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+
+  .result-card .config-list { display: grid; gap: 10px; }
+  .result-card .config-row {
+    display: flex; justify-content: space-between; gap: 16px; padding: 13px 14px;
+    background: #1d1d23; border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 10px; font-size: 13px;
+  }
+  .result-card .config-row span { color: #a5a5ad; }
+  .result-card .config-row strong { text-align: right; color: #f7f7f8; font-family: 'JetBrains Mono', monospace; }
+
+  .result-card .tips { margin: 0; padding: 0; list-style: none; display: grid; gap: 11px; }
+  .result-card .tips li { display: flex; gap: 10px; color: #dedee2; font-size: 13px; line-height: 1.5; }
+  .result-card .tips li::before { content: "✓"; color: #ff5967; font-weight: 900; }
+
+  .result-card .profile {
+    padding: 17px; background: #211317; border: 1px solid #59232d; border-radius: 12px;
+  }
+  .result-card .profile-tag {
+    display: inline-block; padding: 6px 9px; background: #4b1720; color: #ff9aa3;
+    border-radius: 6px; font-size: 10px; font-weight: 800; letter-spacing: 1px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .result-card .profile p { margin: 12px 0 0; color: #dedee2; font-size: 13px; line-height: 1.5; }
+  .result-card .profile strong { color: #fff; }
+
+  .result-card .result-footer {
+    padding: 20px 12px; text-align: center; background: #101014; border-top: 1px solid #303038;
+  }
+  .result-card .result-footer strong { display: block; font-size: 22px; letter-spacing: 3px; font-family: 'Oswald', sans-serif; color: #f7f7f8; }
+  .result-card .result-footer span { display: block; margin-top: 7px; color: #ff5967; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; font-family: 'JetBrains Mono', monospace; }
+
+  .output-note { color: #a5a5ad; font-size: 11px; line-height: 1.5; text-align: center; margin: 15px auto 0; max-width: 560px; font-style: italic; }
+  .output-actions { display: flex; gap: 10px; margin: 18px 0 0; }
+  .output-actions button {
+    flex: 1; border: 1px solid #4a252b; border-radius: 10px; padding: 13px 16px;
+    color: #fff; background: #a81728; font-size: 13px; font-weight: 800; cursor: pointer;
+    font-family: 'Inter', sans-serif; transition: all 0.2s ease;
+  }
+  .output-actions button.secondary { background: #19191f; border-color: #393941; color: #dedee2; }
+  .output-actions button:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+  @media (max-width: 560px) {
+    .result-card .result-hero, .result-card .content { padding: 21px 18px; }
+    .result-card .meta-grid { grid-template-columns: 1fr; }
+    .result-card .brand { font-size: 25px; }
+    .result-card .status { font-size: 9px; }
+    .output-actions { flex-direction: column; }
   }
 
-  .stat-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: var(--line); border: 1px solid var(--line);
-    margin-bottom: 1px;
-    border-radius: 2px 2px 0 0;
-    overflow: hidden;
-  }
-  @media(max-width: 600px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
-  .stat {
-    background: var(--card-raised);
-    padding: 20px 18px;
-    transition: all 0.25s ease;
-  }
-  .stat:hover {
-    background: #1E1E26;
-    box-shadow: inset 0 0 0 1px rgba(227, 38, 46, 0.35);
-  }
-  .stat .k {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--silver); text-transform: uppercase; letter-spacing: 0.1em;
-    margin-bottom: 8px; font-weight: 500;
-  }
-  .stat .v {
-    font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700;
-    color: var(--white);
-  }
-  .stat .v small { font-size: 15px; color: var(--silver-dim); font-weight: 400; }
-
-  .meta-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1px; background: var(--line); border: 1px solid var(--line);
-    border-top: none;
-    border-radius: 0 0 2px 2px;
-    overflow: hidden;
-  }
-  @media(max-width: 600px) { .meta-grid { grid-template-columns: 1fr; } }
-  .meta {
-    background: var(--card-bg);
-    padding: 18px;
-    transition: all 0.25s ease;
-  }
-  .meta:hover {
-    background: #19191F;
-    box-shadow: inset 0 0 0 1px rgba(227, 38, 46, 0.35);
-  }
-  .meta .k {
-    font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    color: var(--silver); text-transform: uppercase; letter-spacing: 0.1em;
-    margin-bottom: 6px; font-weight: 500;
-  }
-  .meta .v {
-    font-size: 15px; color: var(--crimson);
-    font-family: 'JetBrains Mono', monospace; font-weight: 700;
-    word-break: break-word;
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    body { padding: 0 !important; background: #fff !important; color: #111 !important; }
+    header, .hero, .azr-float-widget, section.info, footer, .gen-head, .field-row, .style-grid, .field, .gen-btn, .output-actions, .output-note { display: none !important; }
+    .wrap, .generator { width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; border: none !important; background: transparent !important; box-shadow: none !important; }
+    .bracket::before, .bracket::after, .bracket .bl, .bracket .br { display: none !important; }
+    .output { display: block !important; margin: 0 !important; }
+    .result-card { box-shadow: none !important; border: 1px solid #bbb !important; border-radius: 0 !important; }
+    .result-card .result-hero { background: #17171b !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .result-card .content, .result-card .result-footer, .result-card .profile, .result-card .config-row, .result-card .meta-item { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .result-card .section { break-inside: avoid; }
   }
 
   /* sections */
@@ -753,27 +779,75 @@
       <button class="gen-btn" id="genBtn" disabled>Generate my sensitivity</button>
 
       <div class="output" id="output">
-        <div class="output-head">
-          <div>
-            <div class="section-label" style="margin-bottom:4px;">Result</div>
-            <div class="device-tag" id="deviceTag">—</div>
-          </div>
-          <button class="copy-btn" id="copyBtn">Copy values</button>
-        </div>
+        <article class="result-card" id="calibration-result">
+          <header class="result-hero">
+            <div class="brand-row">
+              <h1 class="brand">AZEROX</h1>
+              <span class="status">CALIBRATION READY</span>
+            </div>
+            <h2>BATTLE ROYALE</h2>
+            <div class="eyebrow">SENSITIVITY CALIBRATION</div>
+            <div class="device">
+              <div class="section-kicker">DEVICE INFORMATION</div>
+              <div class="device-name"><span id="resDeviceName">POCO X7 Pro 5G</span> <span id="resBrandName" style="color:#a5a5ad;font-size:13px;">(POCO)</span></div>
+              <div class="meta-grid">
+                <div class="meta-item"><span>Performance Tier</span><strong id="resTier">Mid-Tier Performance</strong></div>
+                <div class="meta-item"><span>Display</span><strong id="resDisplay">120Hz AMOLED</strong></div>
+                <div class="meta-item"><span>Playstyle</span><strong id="resPlaystyle">Full Spray Control</strong></div>
+              </div>
+            </div>
+          </header>
 
-        <div class="stat-grid">
-          <div class="stat"><div class="k">General</div><div class="v" id="s-general">0</div></div>
-          <div class="stat"><div class="k">Red dot</div><div class="v" id="s-reddot">0</div></div>
-          <div class="stat"><div class="k">2x scope</div><div class="v" id="s-2x">0</div></div>
-          <div class="stat"><div class="k">4x scope</div><div class="v" id="s-4x">0</div></div>
-          <div class="stat"><div class="k">Sniper scope</div><div class="v" id="s-sniper">0</div></div>
-          <div class="stat"><div class="k">Free look</div><div class="v" id="s-freelook">0</div></div>
-        </div>
-        <div class="meta-grid">
-          <div class="meta"><div class="k">Recommended DPI</div><div class="v" id="m-dpi">—</div></div>
-          <div class="meta"><div class="k">Fire button size</div><div class="v" id="m-fire">—</div></div>
-          <div class="meta"><div class="k">Hardware & Screen Profile</div><div class="v" id="m-tier" style="font-size:13.5px; line-height:1.4;">—</div></div>
-          <div class="meta"><div class="k">Recommended Drag Technique</div><div class="v" id="m-tech" style="font-size:13.5px; line-height:1.4;">—</div></div>
+          <div class="content">
+            <section class="section">
+              <h3 class="section-title"><b>01</b> SENSITIVITY SETTINGS</h3>
+              <div class="setting"><div class="setting-top"><span>General</span><strong id="resGeneral">88</strong></div><div class="track"><div class="fill" id="barGeneral" style="width:88%"></div></div></div>
+              <div class="setting"><div class="setting-top"><span>Red Dot</span><strong id="resReddot">86</strong></div><div class="track"><div class="fill" id="barReddot" style="width:86%"></div></div></div>
+              <div class="setting"><div class="setting-top"><span>2x Scope</span><strong id="resX2">73</strong></div><div class="track"><div class="fill" id="barX2" style="width:73%"></div></div></div>
+              <div class="setting"><div class="setting-top"><span>4x Scope</span><strong id="resX4">51</strong></div><div class="track"><div class="fill" id="barX4" style="width:51%"></div></div></div>
+              <div class="setting"><div class="setting-top"><span>Sniper Scope</span><strong id="resSniper">26</strong></div><div class="track"><div class="fill" id="barSniper" style="width:26%"></div></div></div>
+              <div class="setting"><div class="setting-top"><span>Free Look</span><strong id="resFreelook">82</strong></div><div class="track"><div class="fill" id="barFreelook" style="width:82%"></div></div></div>
+            </section>
+
+            <section class="section">
+              <h3 class="section-title"><b>02</b> DEVICE CONFIGURATION</h3>
+              <div class="config-list">
+                <div class="config-row"><span>Fire Button Size</span><strong id="resFire">43%</strong></div>
+                <div class="config-row"><span>Recommended DPI</span><strong id="resDpi">437 DPI</strong></div>
+                <div class="config-row"><span>Developer Option</span><strong id="resDevOption">Smallest Width</strong></div>
+              </div>
+            </section>
+
+            <section class="section">
+              <h3 class="section-title"><b>03</b> DEVICE OPTIMIZATION</h3>
+              <ul class="tips" id="resTips">
+                <li>Force 120Hz refresh rate in Display Settings.</li>
+                <li>Enable Game Turbo / Ultra Game Mode.</li>
+                <li>Use performance mode while gaming, if available.</li>
+              </ul>
+            </section>
+
+            <section class="section" style="margin-bottom:0">
+              <h3 class="section-title"><b>04</b> CALIBRATION PROFILE</h3>
+              <div class="profile">
+                <span class="profile-tag" id="resProfileTag">FULL SPRAY CONTROL</span>
+                <p><strong>Drag Technique:</strong> <span id="resDragTech">Linear Drag</span></p>
+                <p><strong>Recoil Method:</strong> <span id="resRecoilMethod">Steady Pull-Down</span></p>
+                <p><strong>Target:</strong> <span id="resTarget">Smooth aiming, stable sprays and controlled recoil.</span></p>
+              </div>
+            </section>
+          </div>
+
+          <footer class="result-footer">
+            <strong>AZEROX</strong>
+            <span>PERFORMANCE • PRECISION • CONTROL</span>
+          </footer>
+        </article>
+
+        <p class="output-note">Recommended starting configuration. Fine-tune according to individual gameplay and device response.</p>
+        <div class="output-actions">
+          <button id="copyBtn">Copy Settings</button>
+          <button class="secondary" onclick="window.print()">Print Result</button>
         </div>
       </div>
     </div>
@@ -1940,41 +2014,58 @@ const styleProfiles = {
   }
 };
 
-// Device optimization instructions
-function getDeviceOptimizations(brand, device) {
+// Device optimization tips list
+function getDeviceOptimizationTips(brand, device) {
   const b = (brand || '').toLowerCase();
   if (device && device.isIOS) {
     return [
-      "1. **Refresh Rate:** Force ProMotion (120Hz) through Display Settings.",
-      "2. **Touch Settings:** Set Haptic Touch to Fast in Accessibility Settings.",
-      "3. **Performance:** Disable Low Power Mode and Background App Refresh while gaming."
+      "Force ProMotion (120Hz) in Display Settings.",
+      "Set Haptic Touch to Fast in Accessibility Settings.",
+      "Disable Low Power Mode and Background App Refresh while gaming."
     ];
   }
   if (b === 'xiaomi' || b === 'poco' || b === 'redmi') {
     return [
-      "1. **Refresh Rate:** Force 120Hz through Display Settings.",
-      "2. **Game Mode:** Enable Game Turbo / Ultra Game Mode.",
-      "3. **Performance:** Keep the device in performance mode while gaming."
+      "Force 120Hz refresh rate in Display Settings.",
+      "Enable Game Turbo / Ultra Game Mode.",
+      "Use performance mode while gaming, if available."
     ];
   }
   if (b === 'samsung') {
     return [
-      "1. **Refresh Rate:** Force 120Hz through Display Settings.",
-      "2. **Game Mode:** Enable Game Booster / Priority Mode in Game Plugins.",
-      "3. **Performance:** Keep the device in performance mode while gaming."
+      "Force 120Hz / Adaptive through Display Settings.",
+      "Enable Game Booster / Priority Mode in Game Plugins.",
+      "Use performance mode while gaming, if available."
     ];
   }
   if (b === 'asus' || b === 'redmagic') {
     return [
-      "1. **Refresh Rate:** Force 120Hz / 144Hz through Display Settings.",
-      "2. **Game Mode:** Enable Ultra Game Mode / X-Mode.",
-      "3. **Performance:** Keep the device in performance mode while gaming."
+      "Lock display to 144Hz / 165Hz through Gaming Center.",
+      "Enable Ultra Touch Response & Anti-mistouch.",
+      "Use performance mode / X-Mode while gaming."
     ];
   }
   return [
-    "1. **Refresh Rate:** Force 120Hz through Display Settings.",
-    "2. **Game Mode:** Enable Game Turbo / Ultra Game Mode.",
-    "3. **Performance:** Keep the device in performance mode while gaming."
+    "Force 120Hz refresh rate in Display Settings.",
+    "Enable Game Turbo / Ultra Game Mode.",
+    "Use performance mode while gaming, if available."
+  ];
+}
+
+// Device optimization instructions for copy
+function getDeviceOptimizations(brand, device) {
+  const tips = getDeviceOptimizationTips(brand, device);
+  if (device && device.isIOS) {
+    return [
+      `1. **Refresh Rate:** ${tips[0]}`,
+      `2. **Touch Settings:** ${tips[1]}`,
+      `3. **Performance:** ${tips[2]}`
+    ];
+  }
+  return [
+    `1. **Refresh Rate:** ${tips[0]}`,
+    `2. **Game Mode:** ${tips[1]}`,
+    `3. **Performance:** ${tips[2]}`
   ];
 }
 
@@ -2021,24 +2112,52 @@ genBtn.addEventListener("click", () => {
     deviceObj: device
   };
 
-  // Render to UI
-  document.getElementById("deviceTag").textContent = `${model} · ${profile.label} profile`;
-  document.getElementById("s-general").textContent = vals.general;
-  document.getElementById("s-reddot").textContent = vals.reddot;
-  document.getElementById("s-2x").textContent = vals.x2;
-  document.getElementById("s-4x").textContent = vals.x4;
-  document.getElementById("s-sniper").textContent = vals.sniper;
-  document.getElementById("s-freelook").textContent = vals.freelook;
+  // Render to new result card
+  const dpiNum = (device.dpiString && device.dpiString.match(/\d+/) ? device.dpiString.match(/\d+/)[0] : '437') + ' DPI';
+  const dpiClean = device.isIOS ? 'Native iOS Default' : dpiNum;
+  const devOption = device.isIOS ? 'Touch Accommodations / Gliding Cursor' : 'Smallest Width';
+  const brandNameText = brandSel.options[brandSel.selectedIndex].text;
 
-  document.getElementById("m-dpi").textContent = vals.dpi;
-  document.getElementById("m-fire").textContent = vals.fire + "%";
-  document.getElementById("m-tier").textContent = vals.tier;
-  document.getElementById("m-tech").textContent = vals.technique;
+  document.getElementById("resDeviceName").textContent = model;
+  document.getElementById("resBrandName").textContent = `(${brandNameText})`;
+  document.getElementById("resTier").textContent = vals.cleanTier || vals.tier;
+  document.getElementById("resDisplay").textContent = vals.display || vals.screen;
+  document.getElementById("resPlaystyle").textContent = profile.label;
+
+  document.getElementById("resGeneral").textContent = vals.general;
+  document.getElementById("barGeneral").style.width = vals.general + "%";
+
+  document.getElementById("resReddot").textContent = vals.reddot;
+  document.getElementById("barReddot").style.width = vals.reddot + "%";
+
+  document.getElementById("resX2").textContent = vals.x2;
+  document.getElementById("barX2").style.width = vals.x2 + "%";
+
+  document.getElementById("resX4").textContent = vals.x4;
+  document.getElementById("barX4").style.width = vals.x4 + "%";
+
+  document.getElementById("resSniper").textContent = vals.sniper;
+  document.getElementById("barSniper").style.width = vals.sniper + "%";
+
+  document.getElementById("resFreelook").textContent = vals.freelook;
+  document.getElementById("barFreelook").style.width = vals.freelook + "%";
+
+  document.getElementById("resFire").textContent = vals.fire + "%";
+  document.getElementById("resDpi").textContent = dpiClean;
+  document.getElementById("resDevOption").textContent = devOption;
+
+  const tips = getDeviceOptimizationTips(brand, device);
+  document.getElementById("resTips").innerHTML = tips.map(t => `<li>${t}</li>`).join("");
+
+  document.getElementById("resProfileTag").textContent = profile.label.toUpperCase();
+  document.getElementById("resDragTech").textContent = vals.controlMethod || profile.technique;
+  document.getElementById("resRecoilMethod").textContent = vals.recoilMethod;
+  document.getElementById("resTarget").textContent = vals.target;
 
   output.classList.add("show");
   output._vals = vals;
   output._device = model;
-  output._brand = brandSel.options[brandSel.selectedIndex].text;
+  output._brand = brandNameText;
   output._style = profile.label;
 
   output.scrollIntoView({ behavior: "smooth", block: "nearest" });
